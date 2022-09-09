@@ -1207,7 +1207,7 @@ def _raw_form_factor(residue_id, q):
     """
     if residue_id not in range(0, 20):
         raise IndexError("Wrong residue id value (has to be 0-19)")
-    return np.interp(q, _raw_data[:, 0], _raw_data[:, residue_id + 1])
+    return np.interp(q, _raw_data[0,:], _raw_data[residue_id + 1,:])
 
 
 _three_letter_dict = {
