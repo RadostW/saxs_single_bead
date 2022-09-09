@@ -426,8 +426,8 @@ experiment = np.array(
     ]
 )
 
-(qs, Is) = scattering_curve(sequence, np.array(locations))
+(qs, Is) = scattering_curve(sequence, np.array(locations),points = 100.)
 
-plt.plot(qs, np.log10(Is))
-plt.plot(experiment[0],experiment[1])
+plt.plot(qs, Is / Is[0])
+plt.plot(experiment[0], experiment[1] / experiment[1][0], label='experiment')
 plt.show()
