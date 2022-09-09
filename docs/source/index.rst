@@ -5,7 +5,7 @@ saxs_single_bead documentation
    :hidden:
    :maxdepth: 1
 
-saxs-single-bead is all Python package to compute small angle X-ray scattering (SAXS) profiles in one-bead-per-residue approximation with numpy
+saxs_single_bead is all Python package to compute small angle X-ray scattering (SAXS) profiles in one-bead-per-residue approximation with numpy
 
 How to install
 ''''''''''''''
