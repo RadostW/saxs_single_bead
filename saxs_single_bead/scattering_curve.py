@@ -67,7 +67,7 @@ def scattering_curve_ensemble(
     residue_codes: list(string)
         List of residues of length `N`. Can be 3 letter codes (such as "GLY") or single letter codes (such as "G")
     residue_locations: np.array(float)
-        Rectangular array with size `M` by `N` by `3` of locations of `C_alpha` atoms (one per residue)
+        Rank 3 array with size `M` by `N` by `3` of locations of `C_alpha` atoms (one per residue)
     minimal_q: float, optional
         Minimal scattering vector, default `0.0`, units: Angstrom^(-1)
     maximal_q: float, optional
