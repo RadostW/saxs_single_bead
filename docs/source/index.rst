@@ -32,6 +32,12 @@ Package contents
 .. automodule:: saxs_single_bead.scattering_curve
    :members:
 
+.. automodule:: saxs_single_bead.replace_bead
+   :members:
+
+.. automodule:: saxs_single_bead.read_pdb
+   :members:
+
 .. automodule:: saxs_single_bead.form_factors
    :members:
    

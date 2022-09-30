@@ -4,7 +4,7 @@ with open('README.md') as f:
     long_description = f.read()
 
 setup(name='saxs_single_bead',
-      version='0.0.2',
+      version='0.0.3',
       description='All Python package to compute small angle X-ray scattering (SAXS) profiles in one-bead-per-residue approximation with numpy',
       url='https://github.com/RadostW/saxs_single_bead/',
       author='Radost Waszkiewicz',
