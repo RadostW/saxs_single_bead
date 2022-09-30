@@ -24,13 +24,13 @@ def read_c_alpha_pdb(filename):
 
     residues = list()
     for line in lines:
-        if "ATOM" in line:
+        if line[0:4] == "ATOM":
             if "CA" in line:
                 x = float(line[30:38])
                 y = float(line[38:46])
                 z = float(line[46:54])
                 residues.append([x, y, z])
-        elif "END" in line:
+        elif line[0:3] == "END":
             break
 
     return np.array(residues)
