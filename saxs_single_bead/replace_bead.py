@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def _get_spherical():
     """
     Return vector distributed uniformly on a sphere
@@ -57,7 +58,9 @@ def replaced_bead(
 
     # Conglomerate direction vector
     conglomerate_centre = np.mean(conglomerate, axis=0)
-    conglomerate_extent = np.sqrt(np.sum((conglomerate_centre - conglomerate_attachment_point)**2,axis=-1))
+    conglomerate_extent = np.sqrt(
+        np.sum((conglomerate_centre - conglomerate_attachment_point) ** 2, axis=-1)
+    )
     conglomerate_direction_vector = _normalize(
         conglomerate_centre - conglomerate_attachment_point
     )
@@ -79,7 +82,7 @@ def replaced_bead(
         )
     )
     conglomerate_axis_aligned = conglomerate_centered @ rotation_a
-    
+
     # Align x direction vector with chain direction vector
     tmp_b = _normalize(np.cross(_get_spherical(), chain_attachment_vector))
     rotation_b = np.transpose(
@@ -91,10 +94,16 @@ def replaced_bead(
             ]
         )
     )
-    conglomerate_direction_aligned = conglomerate_axis_aligned @ np.transpose(rotation_b)
+    conglomerate_direction_aligned = conglomerate_axis_aligned @ np.transpose(
+        rotation_b
+    )
 
     # Shift conglomerate centre to right location
-    conglomerate_shifted = conglomerate_direction_aligned + chain_attachment_point + chain_attachment_vector * conglomerate_extent
+    conglomerate_shifted = (
+        conglomerate_direction_aligned
+        + chain_attachment_point
+        + chain_attachment_vector * conglomerate_extent
+    )
 
     return np.vstack((locations_rest, conglomerate_shifted))
 
@@ -104,9 +113,9 @@ if __name__ == "__main__":
     import sarw_spheres
     import matplotlib.pyplot as plt
 
-    sizes = np.array([30.0]+[1.0]*60)
+    sizes = np.array([30.0] + [1.0] * 60)
     beads = sarw_spheres.generateChain(sizes)
-    beads = beads + np.array([5.,7.,10.])
+    beads = beads + np.array([5.0, 7.0, 10.0])
     domain = _normalize(np.array([1.0, 2.0, 3.0])) * np.linspace(
         0.0, 60.0, num=30
     ).reshape(-1, 1)
