@@ -20,7 +20,7 @@ def _normalize(vector):
     return vector / np.sqrt(np.sum(vector ** 2, axis=-1))
 
 
-def replaced_bead(
+def replace_bead(
     conglomerate, conglomerate_attachment_point, locations, sizes, bead_id
 ):
     """
@@ -52,6 +52,13 @@ def replaced_bead(
             sizes[0] + sizes[1]
         )
         chain_attachment_vector = locations[1] - locations[0]
+        chain_attachment_vector = _normalize(chain_attachment_vector)
+        
+    elif bead_id == -1 or bead_id == (len(sizes) - 1):
+        chain_attachment_point = (locations[-1] * sizes[-2] + locations[-2] * sizes[-1]) / (
+            sizes[-1] + sizes[-2]
+        )
+        chain_attachment_vector = locations[-1] - locations[-2]
         chain_attachment_vector = _normalize(chain_attachment_vector)
     else:
         raise NotImplementedError
@@ -120,7 +127,7 @@ if __name__ == "__main__":
         0.0, 60.0, num=30
     ).reshape(-1, 1)
 
-    beads_with_domain = replaced_bead(domain, domain[-1], beads, sizes, bead_id=0)
+    beads_with_domain = replace_bead(domain, domain[-1], beads, sizes, bead_id=0)
 
     ax = plt.axes(projection="3d")
     (x, y, z) = (

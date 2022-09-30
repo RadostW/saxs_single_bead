@@ -1,4 +1,5 @@
 import numpy as np
+import sys
 
 
 def read_c_alpha_pdb(filename):
@@ -22,18 +23,25 @@ def read_c_alpha_pdb(filename):
 
     lines = contents.splitlines()
 
-    residues = list()
+    residues = dict()
     for line in lines:
         if line[0:4] == "ATOM":
             if "CA" in line:
+                resid = int(line[22:26])
                 x = float(line[30:38])
                 y = float(line[38:46])
                 z = float(line[46:54])
-                residues.append([x, y, z])
+                if resid in residues:
+                    print(f"Warning: multiple locations for residue {resid}", file=sys.stderr)
+                residues[resid] = [x, y, z]
         elif line[0:3] == "END":
             break
 
-    return np.array(residues)
+    residues_list = list()
+    for i in sorted(residues.keys()):
+        residues_list.append(residues[i])
+
+    return np.array(residues_list)
 
 
 if __name__ == "__main__":
