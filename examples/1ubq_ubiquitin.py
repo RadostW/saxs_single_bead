@@ -28,6 +28,12 @@ sequence = list(
     "MQIFVKTLTGKTITLEVEPSDTIENVKAKIQDKEGIPPDQQRLIFAGKQLEDGRTLSDYNIQKESTLHLVLRLRGG"
 )
 
+# SAXS data from:
+# Accurate optimization of amino acid form factors for computing
+# small-angle X-ray scattering intensity of atomistic protein structures
+# D. Tong, S. Yang and L. Lu
+# Journal of Applied Crystalography (2016)
+# 10.1107/S1600576716007962
 experiment = np.transpose(
     np.array(
         [

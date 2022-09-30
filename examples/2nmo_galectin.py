@@ -35,7 +35,12 @@ WGREERQSVFPFESGKPFKIQVLVEPDHFKVAVNDAHLLQYNHRVKKLNEISKLGISGDI\
 DLTSASYTMI"
 )
 
-
+# SAXS data from:
+# The intrinsically disordered N-terminal domain of galectin-3 dynamically
+# mediates multisite self-association of the protein through fuzzy interactions
+# Yu-Hao Lin De-Chen Qiu Wen-Han Chang Yi-Qi Yeh U-Ser Jeng Fu-Tong Liu Jie-rong Huang
+# Protein Structure and Folding, (2017)
+# 10.1074/jbc.M117.802793
 experiment = np.transpose(
     np.array(
         [
