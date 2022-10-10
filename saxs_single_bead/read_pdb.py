@@ -34,9 +34,12 @@ def read_c_alpha_pdb(filename):
                 if resid in residues:
                     print(f"Warning: multiple locations for residue {resid}", file=sys.stderr)
                 residues[resid] = [x, y, z]
+        elif line[0:6] == "ENDMDL":
+            print("Warning: loaded one model of possibly many",file=sys.stderr)
+            break                
         elif line[0:3] == "END":
             break
-
+            
     residues_list = list()
     for i in sorted(residues.keys()):
         residues_list.append(residues[i])
