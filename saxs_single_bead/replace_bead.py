@@ -30,7 +30,7 @@ def replace_bead(
     ----------
     conglomarate : np.array
         `N` by `3` array of locations of beads within the conglomerate
-    attachment_point : np.array or tuple(np.array)
+    conglomerate_attachment_point : np.array or tuple(np.array)
         vector of length `3` describing attachment point of the conglomerate to the chain or tuple of two such attachment points
     locations : np.array
         `M` by `3` array of locations of beads in chain
@@ -47,6 +47,7 @@ def replace_bead(
     assert isinstance(bead_id, int)
 
     locations_rest = np.delete(locations, bead_id, axis=0)
+       
     if bead_id == 0:
         chain_attachment_point = (locations[0] * sizes[1] + locations[1] * sizes[0]) / (
             sizes[0] + sizes[1]
@@ -54,12 +55,19 @@ def replace_bead(
         chain_attachment_vector = locations[1] - locations[0]
         chain_attachment_vector = _normalize(chain_attachment_vector)
         
+        locations_suffix = locations_rest
+        locations_prefix = np.array([]).reshape(-1,3)
+
     elif bead_id == -1 or bead_id == (len(sizes) - 1):
-        chain_attachment_point = (locations[-1] * sizes[-2] + locations[-2] * sizes[-1]) / (
-            sizes[-1] + sizes[-2]
-        )
+        chain_attachment_point = (
+            locations[-1] * sizes[-2] + locations[-2] * sizes[-1]
+        ) / (sizes[-1] + sizes[-2])
         chain_attachment_vector = locations[-1] - locations[-2]
         chain_attachment_vector = _normalize(chain_attachment_vector)
+        
+        locations_prefix = locations_rest
+        locations_suffix = np.array([]).reshape(-1,3)
+        
     else:
         raise NotImplementedError
 
@@ -111,8 +119,8 @@ def replace_bead(
         + chain_attachment_point
         + chain_attachment_vector * conglomerate_extent
     )
-
-    return np.vstack((locations_rest, conglomerate_shifted))
+    
+    return np.vstack((locations_prefix, conglomerate_shifted, locations_suffix))
 
 
 if __name__ == "__main__":
